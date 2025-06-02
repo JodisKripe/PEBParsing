@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 // Function to read the PEB (Process Environment Block) of the current process
-// gcc.exe -m64 -o PEBParsing PEBParsing.c -lntdll
+// gcc.exe -m64 -o PEBParsing PEBParsing.c
 
 void* get_teb_64(){
     void* teb;
