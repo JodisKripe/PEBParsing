@@ -40,7 +40,7 @@ void* get_pcurdir(){
     void* procpara = get_procpara_x64();
     void* pcurdir;
     __asm__ __volatile__("mov %[procpara], %%rax\n\t"
-                         "lea 0x38(%%rax), %%rdx\n\t"
+                         "lea 0x38(%%rax), %%rdx\n\t"  //mov dereferences whatever is stored in the address to rdx, lea moves the address to rdx || Earlier, the dereferencing was done in the mov instruction since there were pointers
                          "mov 0x008(%%rdx), %%rdx\n\t"
                          "mov %%rdx , %[pcurdir]"
                          :[pcurdir] "=r"(pcurdir)
