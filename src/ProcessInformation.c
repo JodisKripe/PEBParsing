@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 // Function to read the PEB (Process Environment Block) of the current process
-// gcc.exe -m64 -o ImagePath ImagePath.c
+// gcc.exe -m64 -o ProcessInformation ProcessInformation.c
 
 #define DEBUG 0
 
@@ -32,7 +32,7 @@ void* get_procpara_x64() {
                          "mov 0x20(%%rdx), %[procpara]"
                          :[procpara] "=r"(procpara)
                          :[peb] "r" (peb)
-                         : "rax");
+                         : "rdx");
     return procpara;
 }
 
@@ -40,7 +40,8 @@ void* get_pcurdir(){
     void* procpara = get_procpara_x64();
     void* pcurdir;
     __asm__ __volatile__("mov %[procpara], %%rax\n\t"
-                         "mov 0x40(%%rax), %%rdx\n\t"
+                         "lea 0x38(%%rax), %%rdx\n\t"
+                         "mov 0x008(%%rdx), %%rdx\n\t"
                          "mov %%rdx , %[pcurdir]"
                          :[pcurdir] "=r"(pcurdir)
                          :[procpara] "r" (procpara)
@@ -63,7 +64,7 @@ void* get_pimagepathname(){
     void* procpara = get_procpara_x64();
     void* pimagepathname;
     __asm__ __volatile__("mov %[procpara], %%rax\n\t"
-                         "mov 0x78(%%rax), %[pimagepathname]"
+                         "mov 0x68(%%rax), %[pimagepathname]"
                          :[pimagepathname] "=r"(pimagepathname)
                          :[procpara] "r" (procpara)
                          : "rax");

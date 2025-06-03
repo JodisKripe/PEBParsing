@@ -5,7 +5,7 @@
 
 // Function to read the PEB (Process Environment Block) of the current process
 // gcc.exe -m64 -o debugging debugging.c
-#define DEBUG 0
+#define DEBUG 1
 
 void* get_teb_64(){
     void* teb;
