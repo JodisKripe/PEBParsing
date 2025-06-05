@@ -32,4 +32,4 @@ clean:
 	rm -rf $(OUTDIR)/*.exe
 	rm -rf $(OUTDIR)/*.o
 
-.PHONY: all clean
+.PHONY: all clean exec obj
