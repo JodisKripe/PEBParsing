@@ -10,10 +10,10 @@ Current the various files here perform the following functions:
 - [x] Prints loaded modules
 
 Convert to BOF:
-- [] PEBParsing_O.c
-- [] ProcessInformation_O.c
-- [] Module_O.c
-- [] debugging_O.c
+- [ ] PEBParsing_O.c
+- [ ] ProcessInformation_O.c
+- [ ] Module_O.c
+- [ ] debugging_O.c
 
 Will convert these into a BOF too hopefully.
 
