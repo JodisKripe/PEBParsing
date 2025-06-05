@@ -7,7 +7,7 @@ Current the various files here perform the following functions:
 - [x] Print Environmental Variables
 - [x] Print Process Information
 - [x] Fetches debugging Information
-- [ ] Prints loaded modules
+- [x] Prints loaded modules
 
 Will convert these into a BOF too hopefully.
 
