@@ -5,16 +5,31 @@ SRCDIR = src
 OUTDIR = x64
 ARCH = -m64
 
-SOURCES := $(wildcard $(SRCDIR)/*.c)
-BINARIES := $(patsubst $(SRCDIR)/%.c,$(OUTDIR)/%.exe,$(SOURCES))
+FSOURCES := $(wildcard $(SRCDIR)/*_F.c)
+OSOURCES := $(wildcard $(SRCDIR)/*_O.c)
+FBINARIES := $(patsubst $(SRCDIR)/%_F.c,$(OUTDIR)/%.exe,$(FSOURCES)) 
+OBINARIES := $(patsubst $(SRCDIR)/%_O.c,$(OUTDIR)/%.o,$(OSOURCES))
 
-all: $(BINARIES)
+all:
+	@mkdir -p $(OUTDIR)
+	$(MAKE) exec
+	$(MAKE) obj
 
-$(OUTDIR)/%.exe: $(SRCDIR)/%.c
+exec: $(FBINARIES)
+
+$(OUTDIR)/%.exe: $(SRCDIR)/%_F.c
 	@mkdir -p $(OUTDIR)
 	$(CC) $(CFLAGS) $(ARCH) -o $@ $< 2>/dev/null
 
+
+obj: $(OBINARIES)
+
+$(OUTDIR)/%.o: $(SRCDIR)/%_O.c
+	@mkdir -p $(OUTDIR)
+	$(CC) $(CFLAGS) $(ARCH) -c -o $@ $< 2>/dev/null
+
 clean:
 	rm -rf $(OUTDIR)/*.exe
+	rm -rf $(OUTDIR)/*.o
 
 .PHONY: all clean
